@@ -1,0 +1,186 @@
+{
+  "Function": {
+    "prefix": "fn",
+    "body": [
+      "fn ${1:name}(${2:params}) -> ${3:nothing} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Function declaration"
+  },
+  "Public Function": {
+    "prefix": "pfn",
+    "body": [
+      "public fn ${1:name}(${2:params}) -> ${3:nothing} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Public function declaration"
+  },
+  "Module": {
+    "prefix": "module",
+    "body": [
+      "module ${1:name} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Module declaration"
+  },
+  "Struct": {
+    "prefix": "struct",
+    "body": [
+      "struct ${1:Name} {",
+      "\t${2:field}:${3:int};",
+      "}"
+    ],
+    "description": "Struct declaration"
+  },
+  "Class": {
+    "prefix": "class",
+    "body": [
+      "class ${1:Name} {",
+      "\t${2:field}:${3:int};",
+      "",
+      "\tfn init(${4:params}) -> nothing {",
+      "\t\t$0",
+      "\t}",
+      "}"
+    ],
+    "description": "Class declaration"
+  },
+  "Enum": {
+    "prefix": "enum",
+    "body": [
+      "enum ${1:Name} {",
+      "\t${2:First} = 0,",
+      "\t${3:Second} = auto,",
+      "\t${4:Third} = auto",
+      "}"
+    ],
+    "description": "Enum declaration"
+  },
+  "If": {
+    "prefix": "if",
+    "body": [
+      "if (${1:condition}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "If statement"
+  },
+  "If-Else": {
+    "prefix": "ife",
+    "body": [
+      "if (${1:condition}) {",
+      "\t$2",
+      "} else {",
+      "\t$0",
+      "}"
+    ],
+    "description": "If-else statement"
+  },
+  "While": {
+    "prefix": "while",
+    "body": [
+      "while (${1:condition}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "While loop"
+  },
+  "For": {
+    "prefix": "for",
+    "body": [
+      "for (let ${1:i}:int = 0; ${1:i} < ${2:count}; ${1:i} += 1) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "C-style for loop"
+  },
+  "For-In": {
+    "prefix": "forin",
+    "body": [
+      "for (${1:item} in ${2:collection}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "For-in loop"
+  },
+  "Try-Catch": {
+    "prefix": "try",
+    "body": [
+      "try {",
+      "\t$1",
+      "} catch (${2:e}:${3:Fault}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Try-catch block"
+  },
+  "Try-Catch-Finally": {
+    "prefix": "tryf",
+    "body": [
+      "try {",
+      "\t$1",
+      "} catch (${2:e}:${3:Fault}) {",
+      "\t$4",
+      "} finally {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Try-catch-finally block"
+  },
+  "Let": {
+    "prefix": "let",
+    "body": "let ${1:name}:${2:int} = ${3:value};",
+    "description": "Local variable declaration"
+  },
+  "Const": {
+    "prefix": "const",
+    "body": "const ${1:name}:${2:int} = ${3:value};",
+    "description": "Constant declaration"
+  },
+  "Var": {
+    "prefix": "var",
+    "body": "var ${1:name}:${2:int} = ${3:value};",
+    "description": "Module/root variable declaration"
+  },
+  "Import": {
+    "prefix": "import",
+    "body": "import ${1:module};",
+    "description": "Import module"
+  },
+  "From Import": {
+    "prefix": "from",
+    "body": "from ${1:module} import ${2:name};",
+    "description": "Import specific names from module"
+  },
+  "Constructor": {
+    "prefix": "init",
+    "body": [
+      "fn init(${1:params}) -> nothing {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Constructor declaration"
+  },
+  "Main": {
+    "prefix": "main",
+    "body": [
+      "fn main() -> nothing {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Main entry point"
+  },
+  "Result Ok": {
+    "prefix": "ok",
+    "body": "ok(${1:value})",
+    "description": "Result ok constructor"
+  },
+  "Result Error": {
+    "prefix": "error",
+    "body": "error(${1:value})",
+    "description": "Result error constructor"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "minilang",
+  "displayName": "Minilang",
+  "description": "Syntax highlighting and language support for Minilang v1.1",
+  "version": "0.1.0",
+  "publisher": "minilang",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "minilang",
+        "aliases": ["Minilang", "minilang"],
+        "extensions": [".ml"],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/minilang-icon.png",
+          "dark": "./icons/minilang-icon.png"
+        }
+      },
+      {
+        "id": "minilang-lib",
+        "aliases": ["Minilang Library"],
+        "extensions": [".mll"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "minilang",
+        "scopeName": "source.minilang",
+        "path": "./syntaxes/minilang.tmLanguage.json"
+      },
+      {
+        "language": "minilang-lib",
+        "scopeName": "source.minilang",
+        "path": "./syntaxes/minilang.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "minilang",
+        "path": "./snippets/minilang.json"
+      }
+    ]
+  }
+}

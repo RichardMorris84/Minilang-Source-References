@@ -1,0 +1,394 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Minilang",
+  "scopeName": "source.minilang",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#module-declaration" },
+    { "include": "#import-declaration" },
+    { "include": "#enum-declaration" },
+    { "include": "#struct-declaration" },
+    { "include": "#class-declaration" },
+    { "include": "#function-declaration" },
+    { "include": "#constructor-declaration" },
+    { "include": "#control-flow" },
+    { "include": "#exception-handling" },
+    { "include": "#declaration-keywords" },
+    { "include": "#constants-language" },
+    { "include": "#strings" },
+    { "include": "#chars" },
+    { "include": "#decimal-literals" },
+    { "include": "#float-literals" },
+    { "include": "#integer-literals" },
+    { "include": "#operators" },
+    { "include": "#punctuation" },
+    { "include": "#type-keywords" },
+    { "include": "#collection-type-keywords" },
+    { "include": "#result-constructors" },
+    { "include": "#fault-types" },
+    { "include": "#builtin-methods" },
+    { "include": "#function-call" },
+    { "include": "#member-access" },
+    { "include": "#identifiers" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.minilang",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.minilang",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+
+    "module-declaration": {
+      "match": "\\b(module)\\s+([A-Za-z_][A-Za-z0-9_.]*)",
+      "captures": {
+        "1": { "name": "keyword.other.module.minilang" },
+        "2": { "name": "entity.name.namespace.minilang" }
+      }
+    },
+
+    "import-declaration": {
+      "patterns": [
+        {
+          "match": "\\b(from)\\s+([A-Za-z_][A-Za-z0-9_.]*)\\s+(import)\\b",
+          "captures": {
+            "1": { "name": "keyword.control.import.minilang" },
+            "2": { "name": "entity.name.namespace.minilang" },
+            "3": { "name": "keyword.control.import.minilang" }
+          }
+        },
+        {
+          "match": "\\b(import)\\s+([A-Za-z_][A-Za-z0-9_.]*)",
+          "captures": {
+            "1": { "name": "keyword.control.import.minilang" },
+            "2": { "name": "entity.name.namespace.minilang" }
+          }
+        }
+      ]
+    },
+
+    "enum-declaration": {
+      "match": "\\b(public\\s+)?(enum)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+      "captures": {
+        "1": { "name": "storage.modifier.visibility.minilang" },
+        "2": { "name": "storage.type.enum.minilang" },
+        "3": { "name": "entity.name.type.enum.minilang" }
+      }
+    },
+
+    "struct-declaration": {
+      "match": "\\b(public\\s+)?(struct)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+      "captures": {
+        "1": { "name": "storage.modifier.visibility.minilang" },
+        "2": { "name": "storage.type.struct.minilang" },
+        "3": { "name": "entity.name.type.struct.minilang" }
+      }
+    },
+
+    "class-declaration": {
+      "match": "\\b(public\\s+)?(class)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+      "captures": {
+        "1": { "name": "storage.modifier.visibility.minilang" },
+        "2": { "name": "storage.type.class.minilang" },
+        "3": { "name": "entity.name.type.class.minilang" }
+      }
+    },
+
+    "constructor-declaration": {
+      "match": "\\b(fn)\\s+(init)\\s*\\(",
+      "captures": {
+        "1": { "name": "storage.type.function.minilang" },
+        "2": { "name": "entity.name.function.constructor.minilang" }
+      }
+    },
+
+    "function-declaration": {
+      "match": "\\b(public\\s+)?(fn)\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
+      "captures": {
+        "1": { "name": "storage.modifier.visibility.minilang" },
+        "2": { "name": "storage.type.function.minilang" },
+        "3": { "name": "entity.name.function.minilang" }
+      }
+    },
+
+    "control-flow": {
+      "match": "\\b(if|else|while|for|in|return|break|continue)\\b",
+      "name": "keyword.control.minilang"
+    },
+
+    "exception-handling": {
+      "match": "\\b(try|catch|finally|throw)\\b",
+      "name": "keyword.control.exception.minilang"
+    },
+
+    "declaration-keywords": {
+      "patterns": [
+        {
+          "match": "\\b(let|var|const)\\b",
+          "name": "storage.type.declaration.minilang"
+        },
+        {
+          "match": "\\b(public)\\b",
+          "name": "storage.modifier.visibility.minilang"
+        },
+        {
+          "match": "\\b(ref)\\b",
+          "name": "storage.modifier.ref.minilang"
+        },
+        {
+          "match": "\\b(fn)\\b",
+          "name": "storage.type.function.minilang"
+        },
+        {
+          "match": "\\b(struct)\\b",
+          "name": "storage.type.struct.minilang"
+        },
+        {
+          "match": "\\b(class)\\b",
+          "name": "storage.type.class.minilang"
+        },
+        {
+          "match": "\\b(enum)\\b",
+          "name": "storage.type.enum.minilang"
+        },
+        {
+          "match": "\\b(module)\\b",
+          "name": "keyword.other.module.minilang"
+        },
+        {
+          "match": "\\b(this)\\b",
+          "name": "variable.language.this.minilang"
+        },
+        {
+          "match": "\\b(auto)\\b",
+          "name": "keyword.other.auto.minilang"
+        }
+      ]
+    },
+
+    "constants-language": {
+      "patterns": [
+        {
+          "match": "\\b(true|false)\\b",
+          "name": "constant.language.boolean.minilang"
+        },
+        {
+          "match": "\\b(nothing)\\b",
+          "name": "constant.language.nothing.minilang"
+        }
+      ]
+    },
+
+    "strings": {
+      "name": "string.quoted.double.minilang",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.minilang",
+          "match": "\\\\(?:[\\\\\"nrt0]|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})"
+        },
+        {
+          "name": "invalid.illegal.unrecognized-escape.minilang",
+          "match": "\\\\."
+        }
+      ]
+    },
+
+    "chars": {
+      "name": "string.quoted.single.minilang",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "constant.character.escape.minilang",
+          "match": "\\\\(?:[\\\\'nrt0]|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})"
+        },
+        {
+          "name": "invalid.illegal.unrecognized-escape.minilang",
+          "match": "\\\\."
+        }
+      ]
+    },
+
+    "decimal-literals": {
+      "patterns": [
+        {
+          "name": "constant.numeric.decimal-suffix.minilang",
+          "match": "\\b[0-9]+\\.[0-9]+(?:[eE][+-]?[0-9]+)?[dD]\\b"
+        },
+        {
+          "name": "constant.numeric.decimal-suffix.minilang",
+          "match": "\\b[0-9]+(?:[eE][+-]?[0-9]+)?[dD]\\b"
+        }
+      ]
+    },
+
+    "float-literals": {
+      "patterns": [
+        {
+          "name": "constant.numeric.float.minilang",
+          "match": "\\b[0-9]+\\.[0-9]+(?:[eE][+-]?[0-9]+)?\\b"
+        },
+        {
+          "name": "constant.numeric.float.minilang",
+          "match": "\\b[0-9]+[eE][+-]?[0-9]+\\b"
+        }
+      ]
+    },
+
+    "integer-literals": {
+      "name": "constant.numeric.integer.minilang",
+      "match": "\\b[0-9]+\\b"
+    },
+
+    "operators": {
+      "patterns": [
+        {
+          "match": "->",
+          "name": "keyword.operator.arrow.minilang"
+        },
+        {
+          "match": "\\?\\.",
+          "name": "keyword.operator.optional-chain.minilang"
+        },
+        {
+          "match": "\\?\\[",
+          "name": "keyword.operator.optional-index.minilang"
+        },
+        {
+          "match": "\\?\\?",
+          "name": "keyword.operator.fallback.minilang"
+        },
+        {
+          "match": "[+\\-*/%]=",
+          "name": "keyword.operator.assignment.compound.minilang"
+        },
+        {
+          "match": "==|!=|<=|>=|<|>",
+          "name": "keyword.operator.comparison.minilang"
+        },
+        {
+          "match": "=",
+          "name": "keyword.operator.assignment.minilang"
+        },
+        {
+          "match": "\\b(and|or|not)\\b",
+          "name": "keyword.operator.logical.minilang"
+        },
+        {
+          "match": "[+\\-*/%]",
+          "name": "keyword.operator.arithmetic.minilang"
+        },
+        {
+          "match": "\\*(?=[A-Za-z_])",
+          "name": "keyword.operator.ref.minilang"
+        }
+      ]
+    },
+
+    "punctuation": {
+      "patterns": [
+        {
+          "match": ";",
+          "name": "punctuation.terminator.semicolon.minilang"
+        },
+        {
+          "match": ",",
+          "name": "punctuation.separator.comma.minilang"
+        },
+        {
+          "match": "\\.",
+          "name": "punctuation.accessor.dot.minilang"
+        },
+        {
+          "match": ":",
+          "name": "punctuation.separator.colon.minilang"
+        },
+        {
+          "match": "[\\(\\)]",
+          "name": "punctuation.bracket.round.minilang"
+        },
+        {
+          "match": "[\\[\\]]",
+          "name": "punctuation.bracket.square.minilang"
+        },
+        {
+          "match": "[\\{\\}]",
+          "name": "punctuation.bracket.curly.minilang"
+        }
+      ]
+    },
+
+    "type-keywords": {
+      "match": "\\b(int|i8|i16|i32|i64|u8|u16|u32|u64|float|f32|f64|decimal|bool|char|string|nothing|never)\\b",
+      "name": "support.type.primitive.minilang"
+    },
+
+    "collection-type-keywords": {
+      "patterns": [
+        {
+          "match": "\\b(array|list|map|set|result)(?=\\s*<)",
+          "name": "support.type.collection.minilang"
+        },
+        {
+          "match": "\\b(array)(?=\\s*\\[)",
+          "name": "support.type.collection.minilang"
+        },
+        {
+          "match": "\\b(set)(?=\\s*\\{)",
+          "name": "support.type.collection.minilang"
+        },
+        {
+          "match": "\\b(tuple)\\b",
+          "name": "support.type.collection.minilang"
+        }
+      ]
+    },
+
+    "result-constructors": {
+      "match": "\\b(ok|error)\\s*\\(",
+      "captures": {
+        "1": { "name": "support.function.builtin.minilang" }
+      }
+    },
+
+    "fault-types": {
+      "match": "\\b(Fault|NullReceiverFault|DivideByZeroFault|InvalidCastFault|InvalidResultAccessFault|IndexTypeFault|ArithmeticFault|StackOverflowFault|HostCallFault)\\b",
+      "name": "support.type.fault.minilang"
+    },
+
+    "builtin-methods": {
+      "match": "\\.\\s*(append|insert|remove|length|clear|contains|add|is_ok|is_error|value|error_value|unwrap_or|area|perimeter|sum|diff)\\s*\\(",
+      "captures": {
+        "1": { "name": "support.function.method.minilang" }
+      }
+    },
+
+    "function-call": {
+      "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
+      "captures": {
+        "1": { "name": "entity.name.function.call.minilang" }
+      }
+    },
+
+    "member-access": {
+      "match": "(?<=\\.)\\s*([A-Za-z_][A-Za-z0-9_]*)\\b(?!\\s*\\()",
+      "captures": {
+        "1": { "name": "variable.other.member.minilang" }
+      }
+    },
+
+    "identifiers": {
+      "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b",
+      "name": "variable.other.minilang"
+    }
+  }
+}
