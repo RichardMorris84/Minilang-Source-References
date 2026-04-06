@@ -740,22 +740,22 @@ module helpers {
     }
 
     // -----------------------------------------------------------------------
-    // 19. FUNCTION DEMONSTRATING SYSTEM CALLS AND INTEROP
+    // 19. FUNCTION DEMONSTRATING SYSTEM CALLS
     // -----------------------------------------------------------------------
 
     public fn systemCallsDemo() -> nothing {
         // System call to get current time
-        let now:datetime = system.now();
+        let now:int = syscall("GET_TIME", []);
 
         // System call to read environment variable
-        let path:string = system.getenv("PATH");
+        let path:array<string> = syscall("GET_ENV", ["PATH"]);
 
         // System call to execute external command
-        let result:int = system.exec("echo Hello");
+        syscall("PRINT", ["Hello World!", "stdout"]);
+        syscall("PRINT", ["This is a generic error message.", "stderr"]);
+        
 
-        // Interop with imported Point class
-        let p:Point = Point(3, 4);
-        let distance:float = p.distance_to(Point(0, 0));
+
     }
 
     // -----------------------------------------------------------------------
